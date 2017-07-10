@@ -29,4 +29,12 @@ When the deployment has finished and you have an external IP for your phpPgAdmin
 
 Once web portal has loaded, you'll need to authenticate a new connection to your PostgreSQL database by clicking on the `Servers` tab.
 
+## Ingress
+The default behaviour of this helm chart is to create a new load balancer service.
+
+If you have an ingress controller deployed and would rather use ingress, you need to enable it in the `values.yaml` file.
+You will need to also provide values for hostname and configure a TLS secret or leverage Let's Encrypt using [Kube-Lego](https://github.com/jetstack/kube-lego). Once configured, change the `service.type` value to `ClusterIP`.
+
+Assuming the `host` header is correct in your HTTP request, you can hit the external ip of the ingress controller and it should route to your phppgadmin instance.
+
 <img src="images/psql.PNG" />
